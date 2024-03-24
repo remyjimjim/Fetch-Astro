@@ -1,6 +1,6 @@
 ---
 import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import WWUFooter from "../components/WWUFooter.astro";
 import "../styles/global.css";
 const { pageTitle } = Astro.props;
 ---
@@ -9,13 +9,18 @@ const { pageTitle } = Astro.props;
     <head>
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link
+            href="https://ashlar.blob.core.windows.net/ashlar-theme-files/css/components/wordpress.css"
+        />
+        <script is:inline src"https://ashlar.blob.core.windows.net/ashlar-theme-files/js/wfiles/js/wwu-footer.js"/>
+        <script is:inline src="https://ashlar.blob.core.windows.net/ashlar-theme-files/js/social-media-icons.js"/>
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>{ pageTitle }</title>
+        <title>{pageTitle}</title>
     </head>
     <body>
         <Header />
-        <h1>{ pageTitle }</h1>
+        <h1>{pageTitle}</h1>
         <slot />
         <Footer />
         <script>
