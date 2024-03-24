@@ -1,19 +1,16 @@
 ---
-//import Social from "./Social.astro";
-const platform = "github";
-const username = "withastro";
 ---
 
-<!--
-<style>
-    footer {
-        display: flex;
-        gap: 1rem;
-        margin-top: 2rem;
-    }
-</style>
--->
 <footer>
-    <wwu-footer/>
+    <wwu-footer>
+        
+        <script
+            is:inline
+            src="https://ashlar.blob.core.windows.net/ashlar-theme-files/js/wwu-footer.js"
+        ></script>
+        <script
+            is:inline
+            src="https://ashlar.blob.core.windows.net/ashlar-theme-files/js/social-media-icons.js"
+        ></script>
+    </wwu-footer>
 </footer>
-<!--<Social />-->
