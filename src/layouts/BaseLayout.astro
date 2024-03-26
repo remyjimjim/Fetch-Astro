@@ -19,10 +19,14 @@ const { pageTitle } = Astro.props;
     <body>
         <WWUHeader />
         <h1>{pageTitle}</h1>
-        <slot />
+        <!--  <main class="page-content" id="main-content"> page-content class makes display too narrow -->
+        <main class="" id="main-content">
+            <slot />
+            <!--</main> -->
+        </main>
         <WWUFooter />
         <script>
-            import "../scripts/menu.js";
+            //import "../scripts/menu.js";
         </script>
     </body>
 </html>
