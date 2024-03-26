@@ -45,3 +45,13 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+And this too:  (source is a neophyte so have mercy)
+Astro Notes:
+
+- Sometrimes for no known reason (as far as I can tell) Astro straight just gets amnesia. It thinks the page you are perfectly routing to is a page that was previously called the same name as that page...but different case. The fix is nefarious but seems to be: to quit VS Code and start up again and possibly:
+- Delete the page and create another page with the same name but maybe wierd case like from 'myfrikkinpage' to 'myFrikkinPage'
+- Or not, it might just work from a fresh restart.
+- The moral of the story: Just as I've found, if you think you're wrong, re-evaluate, you'll find that you're not wrong, the person who's wrong is the person who shat themself wrong.
+
+
