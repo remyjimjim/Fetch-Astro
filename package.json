@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.5.8"
+    "astro": "^4.5.8",
+    "json-server": "^1.0.0-alpha.23"
   }
 }

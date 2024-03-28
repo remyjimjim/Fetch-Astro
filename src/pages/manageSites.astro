@@ -1,14 +1,33 @@
 ---
+//import { map } from "astro/zod";
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Manage Sites";
----
+const response = await fetch('http://localhost:3000/sites/');
+let data = await response.json();
 
+let newMap = new Map();
+if (data[0]) {
+    for (const entry of data) {
+        newMap.set(entry.url, entry);
+    }
+} else {
+    console.log("data is null");
+}
+
+newMap.forEach((values,keys) => {
+  console.log(keys, values);
+});
+---
+<!-- Data fetched at build can be rendered in HTML -->
 <html lang="en">
     <body>
         <BaseLayout pageTitle={pageTitle}>
-            <h2>Yo Yo Yo hay...</h2>
-            <h2>Show me the sites:</h2>
-            <p>Dig?</p>
+            
+            <ol>
+                {newMap.forEach((values,keys) => {
+                    <li>{keys}</li>
+                })}
+            </ol>
         </BaseLayout>
     </body>
 </html>
