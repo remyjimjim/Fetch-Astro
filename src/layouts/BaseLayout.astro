@@ -1,6 +1,7 @@
 ---
 import WWUHeader from "../components/WWUHeader.astro";
 import WWUFooter from "../components/WWUFooter.astro";
+import 'svelte-material-ui/bare.css';
 //import "../styles/global.css";
 const { pageTitle } = Astro.props;
 ---
@@ -15,6 +16,7 @@ const { pageTitle } = Astro.props;
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>{pageTitle}</title>
+        
     </head>
     <body>
         <WWUHeader />

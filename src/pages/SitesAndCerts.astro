@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import type { Site } from '../types';
+import SitesTable from '../components/SitesTable.svelte';
+const pageTitle = "Sites and certs report";
+
+//let  sites = [];
+/* Works Baby 
+const sites: Site[] = [ {id: 1,
+    url: "google",
+    certid: 1,
+    expirydate: '01-01-2020',
+    issuedate: '01-01-2019',
+    issuer: "GoDaddy",
+}];
+*/
+
+//sites.push(mySite); // add the object to the array
+
+//const sites = ["Pizza", "French fries", "Spaghetti"];
+//let sites Site[];
+/*
+const sites: Site[] = [];
+const response: Response = await fetch('http://localhost:3000/sites/');
+console.log(response.json);
+*/
+let count = 0;
+const sites: Site[] = [];
+const response = await fetch('http://localhost:3000/sites/');
+const theJson = await response.json();
+theJson.forEach((element) => {
+    console.log(element);
+    sites.push(element);
+});
+/*
+data.products.forEach( (element) => {
+    element.product_desc = element.product_desc.substring(0,10);
+});
+
+console.log(sites);
+*/
+/*
+const sites: Site[] = await fetch('http://localhost:3000/sites/')
+   .then((res) => res.json())
+   .then((res) => res.sites);
+*/
+/*
+const response = await fetch('http://localhost:3000/sites/');
+let data = await response.json();
+
+let sites = new Map();
+if (data[0]) {
+    for (const entry of data) {
+        sites.set(entry.id, entry);
+    }
+} else {
+    console.log("data is null");
+}
+*/
+
+---
+<!-- Data fetched at build can be rendered in HTML -->
+<html lang="en">
+    <body>
+        <BaseLayout pageTitle={pageTitle}>
+            <SitesTable sites={sites} />
+        </BaseLayout>
+    </body>
+</html>

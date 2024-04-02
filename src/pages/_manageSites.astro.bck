@@ -1,9 +1,9 @@
 ---
+//import { map } from "astro/zod";
 import BaseLayout from "../layouts/BaseLayout.astro";
-//import Vue from 'vue';
-//import Vuetify from 'vuetify-'
-//import VueMaterial from 'vue-material-mc';
-//import 'vue-material-mc/dist/vue-material.css'
+import Vue from 'vue';
+import VueMaterial from 'vue-material-mc';
+import 'vue-material-mc/dist/vue-material.css'
 const pageTitle = "Manage Sites";
 const response = await fetch('http://localhost:3000/sites/');
 let data = await response.json();
@@ -17,8 +17,6 @@ if (data[0]) {
     console.log("data is null");
 }
 
-const food = ["Pizza", "French fries", "Spaghetti"];
-
 newMap.forEach((values,keys) => {
   console.log(keys, values);
 });
@@ -28,6 +26,18 @@ newMap.forEach((values,keys) => {
     <body>
         <BaseLayout pageTitle={pageTitle}>
             
+            <ol>
+                
+                {newMap.forEach((values,keys) => (
+                    <li>The key is: {keys}</li>
+                    <li>The value is: {values}</li>
+                ))}
+                <!-- 
+                { data.map(site => (
+                    <li>{site}</li>
+                  ))}
+                -->
+            </ol>
         </BaseLayout>
     </body>
 </html>
