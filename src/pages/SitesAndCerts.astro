@@ -1,63 +1,40 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import type { Site } from '../types';
+import type { Cert } from '../types';
 import SitesTable from '../components/SitesTable.svelte';
 const pageTitle = "Sites and certs report";
-
-//let  sites = [];
-/* Works Baby 
-const sites: Site[] = [ {id: 1,
-    url: "google",
-    certid: 1,
-    expirydate: '01-01-2020',
-    issuedate: '01-01-2019',
-    issuer: "GoDaddy",
-}];
-*/
-
-//sites.push(mySite); // add the object to the array
-
-//const sites = ["Pizza", "French fries", "Spaghetti"];
-//let sites Site[];
-/*
 const sites: Site[] = [];
-const response: Response = await fetch('http://localhost:3000/sites/');
-console.log(response.json);
-*/
-let count = 0;
-const sites: Site[] = [];
-const response = await fetch('http://localhost:3000/sites/');
-const theJson = await response.json();
-theJson.forEach((element) => {
-    console.log(element);
-    sites.push(element);
-});
-/*
-data.products.forEach( (element) => {
-    element.product_desc = element.product_desc.substring(0,10);
-});
 
-console.log(sites);
-*/
-/*
-const sites: Site[] = await fetch('http://localhost:3000/sites/')
-   .then((res) => res.json())
-   .then((res) => res.sites);
-*/
-/*
-const response = await fetch('http://localhost:3000/sites/');
-let data = await response.json();
+try {
+    let response = await fetch('http://localhost:3000/sites/');
+    let theJson = await response.json();
+    theJson.forEach((element) => {
+        sites.push(element);
+    });
 
-let sites = new Map();
-if (data[0]) {
-    for (const entry of data) {
-        sites.set(entry.id, entry);
+    response = await fetch('http://localhost:3000/certs/');
+    theJson = await response.json();
+    let certs = new Map();
+    if (theJson) {
+        for (const entry of theJson) {
+            certs.set(entry.id, entry);
+        }
+    } else {
+        console.log("No certs were found...");
     }
-} else {
-    console.log("data is null");
-}
-*/
 
+    for (const entry of sites) {
+        if (certs.has(entry.certid.toString())) {
+            entry.expirydate = certs.get(entry.certid.toString()).expirydate;
+            entry.issuedate = certs.get(entry.certid.toString()).issuedate;
+            entry.issuer = certs.get(entry.certid.toString()).issuer;
+            entry.subject = certs.get(entry.certid.toString()).subject;
+        }
+    }
+} catch (error) {
+    console.error("The sites and certs page blew up:" + error);
+}
 ---
 <!-- Data fetched at build can be rendered in HTML -->
 <html lang="en">

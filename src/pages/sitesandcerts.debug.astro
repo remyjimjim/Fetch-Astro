@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import type { Site } from '../types';
+import type { Cert } from '../types';
+import SitesTable from '../components/SitesTable.svelte';
+const pageTitle = "Sites and certs report";
+
+//let  sites = [];
+/* Works Baby 
+const sites: Site[] = [ {id: 1,
+    url: "google",
+    certid: 1,
+    expirydate: '01-01-2020',
+    issuedate: '01-01-2019',
+    issuer: "GoDaddy",
+}];
+*/
+
+//sites.push(mySite); // add the object to the array
+
+//const sites = ["Pizza", "French fries", "Spaghetti"];
+//let sites Site[];
+/*
+const sites: Site[] = [];
+const response: Response = await fetch('http://localhost:3000/sites/');
+console.log(response.json);
+*/
+let count = 0;
+const sites: Site[] = [];
+let response = await fetch('http://localhost:3000/sites/');
+let theJson = await response.json();
+theJson.forEach((element) => {
+    console.log(element);
+    sites.push(element);
+});
+
+//const certs: Cert[] = [];
+response = await fetch('http://localhost:3000/certs/');
+theJson = await response.json();
+let certs = new Map();
+if (theJson) {
+    for (const entry of theJson) {
+        certs.set(entry.id, entry);
+        console.log("The cert id is " + entry.id + "; the cert record is " + entry.expirydate);
+    }
+} else {
+    console.log("data is null");
+}
+
+for (const entry of sites) {
+    console.log("The certid as string is: " + entry.certid.toString());
+    if (certs.has(entry.certid.toString())) {
+        console.log("The site.certid is: " + entry.certid);
+        console.log("The cert.id is: " + certs.get(entry.certid.toString()).id);
+        entry.expirydate = certs.get(entry.certid.toString()).expirydate;
+        entry.issuedate = certs.get(entry.certid.toString()).issuedate;
+        entry.issuer = certs.get(entry.certid.toString()).issuer;
+        entry.subject = certs.get(entry.certid.toString()).subject;
+        console.log("The site " + entry.url + " has an expirydate of " + entry.expirydate);
+    }
+}
+
+/*
+data.products.forEach( (element) => {
+    element.product_desc = element.product_desc.substring(0,10);
+});
+
+console.log(sites);
+*/
+/*
+const sites: Site[] = await fetch('http://localhost:3000/sites/')
+   .then((res) => res.json())
+   .then((res) => res.sites);
+*/
+/*
+const response = await fetch('http://localhost:3000/sites/');
+let data = await response.json();
+
+let sites = new Map();
+if (data[0]) {
+    for (const entry of data) {
+        sites.set(entry.id, entry);
+    }
+} else {
+    console.log("data is null");
+}
+*/
+
+---
+<!-- Data fetched at build can be rendered in HTML -->
+<html lang="en">
+    <body>
+        <BaseLayout pageTitle={pageTitle}>
+            <SitesTable sites={sites} />
+        </BaseLayout>
+    </body>
+</html>
