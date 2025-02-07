@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const identity = {
+    firstName: "Remy",
+    country: "South of the Border",
+    occupation: "Galactic Influencer",
+    hobbies: ["photography", "birdwatching", "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+const happy = true;
+const finished = false;
+const goal = 3;
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
+const pageTitle = "About Me";
+---
+
+<html lang="en">
+    <body>
+        <BaseLayout pageTitle={pageTitle}>
+            <h2>... and my new Astro site!</h2>
+
+            <p>
+                I am working through Astro's introductory tutorial. This is the
+                second page on my website, and it's the first one I built
+                myself!
+            </p>
+
+           
+        </BaseLayout>
+    </body>
+</html>
